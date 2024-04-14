@@ -3,6 +3,7 @@ limite_de_deposito = 0
 contador_saque = 0
 limite_de_saque = 0
 
+
 def deposito(valor_a_depositar, valor_em_conta):
 
         valor_em_conta += valor_a_depositar
@@ -60,6 +61,7 @@ def extrato(valor_em_conta):
 
 
 def menu(valor_a_depositar, valor_em_conta, valor_a_sacar, limite_de_deposito, limite_de_saque, contador_saque):
+
 
     while True:
 
