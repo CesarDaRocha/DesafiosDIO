@@ -8,10 +8,8 @@ def depositar(dados_usuario, posicao_conta):
         if valor_deposito > 0:
 
             dados_usuario[posicao_conta]['saldo_em_conta'] += valor_deposito
-
             dados_usuario[posicao_conta]['extrato'].append(f"+ R$ {str(valor_deposito)}")
-
-            print(dados_usuario)
+            print(f"\nDepósito de R$ {valor_deposito:.2f} efetuado com sucesso!")
 
             return dados_usuario
         
@@ -88,6 +86,11 @@ def menu_operacao(dados_usuario, posicao_conta):
 
 def cadastrar(dados_usuario):
 
+    estados1 = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'ES', 'GO', 'MA']
+    estados2 = ['MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS']
+    estados3 = ['SC', 'SP', 'SE', 'TO', 'DF', 'RR', 'MS', 'MT', 'RO']
+    estados_total = estados1 + estados2 + estados3
+
     while True:
 
         aux = 0
@@ -95,41 +98,46 @@ def cadastrar(dados_usuario):
         nome = str(input("\nDigite seu nome: "))
         senha = str(input("\nDigite sua senha: "))
         email = str(input("\nDigite seu email: "))
-        estado = str(input("\nDigite seu estado: "))
+        estado = str(input("\nDigite a sigla do seu estado: "))
         cidade = str(input("\nDigite sua cidade: "))
 
-        
+        if len(str(cpf)) == 11 and estado in estados_total:
 
+            if len(dados_usuario) != 0:
 
-        if len(dados_usuario) != 0:
+                for i in range(len(dados_usuario)):
 
-            for i in range(len(dados_usuario)):
+                    if dados_usuario[i]['cpf'] == cpf:
+                        aux = 1
+                        print("\nCPF já cadastrado!")
+                        opcao_menu = int(input("\n[1] Tentar novamente\n[2] Sair\n-> "))
 
-                if dados_usuario[i]['cpf'] == cpf:
-                    aux = 1
-                    print("\nCPF já cadastrado!")
-                    opcao_menu = int(input("\n[1] Tentar novamente\n[2] Sair\n-> "))
+                        if opcao_menu == 2:
 
-                    if opcao_menu == 2:
+                            return dados_usuario
+                        
+                        elif opcao_menu == 1:
 
-                        return dados_usuario
+                            break                        
                     
-                    elif opcao_menu == 1:
+                if aux != 1:
 
-                        break                        
-                
-            if aux != 1:
+                    dados_usuario.append({'cpf': cpf, 'nome': nome, 'senha': senha, 'email': email, 'endereco': {'estado': estado, 'cidade': cidade}, 'saldo_em_conta': 0, 'extrato': []})
+                    return dados_usuario
+                    
+            else:
 
                 dados_usuario.append({'cpf': cpf, 'nome': nome, 'senha': senha, 'email': email, 'endereco': {'estado': estado, 'cidade': cidade}, 'saldo_em_conta': 0, 'extrato': []})
+                print(dados_usuario)
+
                 return dados_usuario
-                
+
         else:
 
-            dados_usuario.append({'cpf': cpf, 'nome': nome, 'senha': senha, 'email': email, 'endereco': {'estado': estado, 'cidade': cidade}, 'saldo_em_conta': 0, 'extrato': []})
-            print(dados_usuario)
+            print("\nErro! Verifique se o CPF ou o endereço está correto")
+            if (int(input("\n[1] Tentar novamente\n[2] Sair\n-> "))) == 2:
 
-            return dados_usuario
-
+                break
 
 def login(dados_usuario):
 
@@ -197,3 +205,6 @@ def inicializacao():
 
 
 inicializacao()
+
+
+
