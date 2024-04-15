@@ -98,7 +98,7 @@ def cadastrar(dados_usuario):
         nome = str(input("\nDigite seu nome: "))
         senha = str(input("\nDigite sua senha: "))
         email = str(input("\nDigite seu email: "))
-        estado = str(input("\nDigite a sigla do seu estado: "))
+        estado = str.upper(input("\nDigite a sigla do seu estado: "))
         cidade = str(input("\nDigite sua cidade: "))
 
         if len(str(cpf)) == 11 and estado in estados_total:
@@ -135,7 +135,7 @@ def cadastrar(dados_usuario):
         else:
 
             print("\nErro! Verifique se o CPF ou o endereço está correto")
-            if (int(input("\n[1] Tentar novamente\n[2] Sair\n-> "))) == 2:
+            if (int(input("\n[1] Tentar novamente\n[2] Voltar\n-> "))) == 2:
 
                 break
 
@@ -205,6 +205,3 @@ def inicializacao():
 
 
 inicializacao()
-
-
-
