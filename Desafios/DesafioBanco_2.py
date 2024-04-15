@@ -5,7 +5,7 @@ def depositar(dados_usuario, posicao_conta):
 
         valor_deposito = float(input("\nDigite o valor a ser depositado: "))
 
-        if valor_deposito > 0:
+        if valor_deposito>0:
 
             dados_usuario[posicao_conta]['saldo_em_conta'] += valor_deposito
             dados_usuario[posicao_conta]['extrato'].append(f"+ R$ {str(valor_deposito)}")
@@ -101,7 +101,7 @@ def cadastrar(dados_usuario):
         estado = str.upper(input("\nDigite a sigla do seu estado: "))
         cidade = str(input("\nDigite sua cidade: "))
 
-        if len(str(cpf)) == 11 and estado in estados_total:
+        if len(str(cpf)) == 11 and estado in estados_total and '@gmail.com' in email:
 
             if len(dados_usuario) != 0:
 
@@ -132,12 +132,29 @@ def cadastrar(dados_usuario):
 
                 return dados_usuario
 
-        else:
+        elif len(str(cpf)) != 11:
 
-            print("\nErro! Verifique se o CPF ou o endereço está correto")
+            print("\nErro! CPF inválido")
             if (int(input("\n[1] Tentar novamente\n[2] Voltar\n-> "))) == 2:
 
                 break
+
+        elif estado not in estados_total:
+
+            print("\nErro! Estado inválido")
+            if (int(input("\n[1] Tentar novamente\n[2] Voltar\n-> "))) == 2:
+
+                break
+
+        elif '@gmail.com' not in email:
+
+            print("\nErro! Email inválido")
+            if (int(input("\n[1] Tentar novamente\n[2] Voltar\n-> "))) == 2:
+
+                break
+
+
+        
 
 def login(dados_usuario):
 
